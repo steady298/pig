@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>黑客风格页面</title>
+    <style>
+        body {
+            background-color: black;
+            color: #00ff00;
+            font-family: "Courier New", monospace;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .progress-bar-container {
+            background-color: #222;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            z-index: 9999;
+        }
+
+        .progress-bar {
+            background-color: #00ff00;
+            height: 100%;
+            width: 0%;
+            transition: width 3s;
+        }
+
+        .hacker-text {
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from,
+            to {
+                border-color: transparent;
+            }
+            50% {
+                border-color: #00ff00;
+            }
+        }
+
+        .password-container {
+            display: none;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        video {
+            width: 640px;
+            height: 360px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <h1 class="hacker-text">Loading...</h1>
+<div>
+        <p class="hacker-ip">远程连接到 <span class="hacker-ip">192.168.10.120</span> 的 <span class="hacker-port">8080</span>
+            端口...</p>
+    </div>
+
+    <div>
+        <p class="hacker-code">正在扫描网络漏洞...</p>
+    </div>
+
+    <div>
+        <p class="hacker-notice">已发现漏洞，执行提权操作...</p>
+    </div>
+
+    <div>
+        <p class="hacker-code">正在获取管理员权限...</p>
+    </div>
+    <script>
+        // Simulate loading progress
+        let progressBar = document.getElementById("progressBar");
+        let width = 0;
+        let interval = setInterval(() => {
+            width += Math.random() * 5;
+            progressBar.style.width = width + "%";
+            if (width >= 100) {
+                clearInterval(interval);
+                document.querySelector("h1").style.display = "none";
+                document.querySelector(".password-container").style.display = "block";
+            }
+        }, 100);
+
+        // Check password and play video
+        var passwordAttempts = 0;
+        var maxPasswordAttempts = 3;
+
+        function checkPassword() {
+            var inputPassword = document.getElementById("password").value;
+            if (inputPassword === "298439051") {
+                document.getElementById("password").value = ""; // 清空密码框
+                passwordAttempts = 0; // 重置密码尝试次数
+                document.getElementById("video-container").style.display = "block"; // 显示视频容器
+                document.getElementById("secret-video").play(); // 播放视频
+            } else {
+                passwordAttempts++;
+                if (passwordAttempts >= maxPasswordAttempts) {
+                    alert("您已达到最大尝试次数，视频无法播放。");
+                } else {
+                    alert("密码错误，请重新输入。您还有 " + (maxPasswordAttempts - passwordAttempts) + " 次尝试机会。");
+                }
+            }
+        }
+    </script>
+
+    <div class="password-container">
+        <label for="password">请输入密码：</label>
+        <input type="password" id="password" />
+        <button onclick="checkPassword()">确认</button>
+    </div>
+
+    <div id="video-container" style="display: none; text-align: center; margin-top: 50px;">
+        <video id="secret-video" controls>
+            <source src="secret.mp4" type="video/mp4">
+            <!-- 添加其他视频格式的源，以增加浏览器兼容性 -->
+            <!-- <source src="secret.webm" type="video/webm"> -->
+            <!-- <source src="secret.ogv" type="video/ogg"> -->
+            您的浏览器不支持播放视频。
+        </video>
+    </div>
+
+    <script>
+        // Confirm window for viewing video
+        var confirmAttempts = 0;
+        var maxConfirmAttempts = 3;
+
+        function showVideo() {
+            if (confirmAttempts < maxConfirmAttempts) {
+                confirmAttempts++;
+                var confirmation = confirm(
+                    "您确定要查看此文件吗？这在您的国家可能是违法的。\n您还有 " +
+                    (maxConfirmAttempts - confirmAttempts) + " 次机会确认。"
+                );
+                if (confirmation) {
+                    document.getElementById("secret-video").play();
+                }
+            } else {
+                alert("您已达到最大尝试次数，视频无法播放。");
+            }
+        }
+
+        document.getElementById("secret-video").addEventListener("ended", function() {
+            showVideo();
+        });
+    </script>
+<div>
+        <p class="hacker-notice">权限验证通过。</p>
+    </div>
+
+    <div>
+        <p class="hacker-code">正在加载保密文件...</p>
+    </div>
+</body>
+
+</html>
